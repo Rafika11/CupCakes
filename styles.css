@@ -1,0 +1,635 @@
+/* Fonte Elegante */
+body {
+  font-family: "Roboto", sans-serif;
+  background-color: #f5f5f5;
+  color: #333333;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Cabeçalho */
+header {
+  background-color: #ff6f61;
+  color: white;
+  padding: 20px;
+}
+
+.header-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.user-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 20px;
+}
+
+#user-status {
+  flex: 1;
+  font-family: "Roboto", sans-serif;
+  font-size: 20px;
+}
+
+#login-section {
+  display: flex;
+  gap: 10px;
+}
+
+#login-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+#login-form input {
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 14px;
+  width: auto;
+  color: #333;
+}
+
+#login-form input::placeholder {
+  color: #999;
+  font-size: 14px;
+}
+
+#login-form button {
+  background-color: #ff6f61;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+#login-form button:hover {
+  background-color: #e55a50;
+  transform: translateY(-2px);
+}
+
+#login-form button:active {
+  background-color: #d1493b;
+  transform: translateY(0);
+}
+
+#cart-badge {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#cart-badge i {
+  font-size: 24px;
+}
+
+/* Estilo do usuário logado */
+#user-loggedin {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#user-name {
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+}
+
+#user-loggedin button {
+  background-color: #ff6f61;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+#user-loggedin button:hover {
+  background-color: #e55a50;
+  transform: translateY(-2px);
+}
+
+#user-loggedin button:active {
+  background-color: #d1493b;
+  transform: translateY(0);
+}
+
+button,
+.btn-voltar {
+  padding: 10px 20px;
+  margin: 5px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 14px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+button {
+  background-color: #ff6f61;
+  color: white;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+button:hover {
+  background-color: #e55a50;
+  transform: translateY(-2px);
+}
+button:active {
+  background-color: #d1493b;
+  transform: translateY(0);
+}
+.btn-voltar {
+  background-color: #ffffff;
+  color: #ff6f61;
+  border: 1px solid #ff6f61;
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+}
+.btn-voltar:hover {
+  background-color: #ff6f61;
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+.btn-voltar:active {
+  background-color: #d1493b;
+  color: #ffffff;
+  transform: translateY(0);
+}
+
+/* Seção de catálogo */
+#catalogo {
+  padding: 20px;
+}
+
+#produtos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.produto {
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 10px;
+  flex: 1 1 calc(33% - 40px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  min-width: 280px;
+}
+
+.produto img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
+
+.produto h3 {
+  margin: 10px 0;
+  color: #ff6f61;
+}
+
+.produto p {
+  margin: 5px 0;
+}
+
+button {
+  padding: 10px 20px;
+  margin: 5px;
+  border: none;
+  cursor: pointer;
+  background-color: #ff6f61;
+  color: white;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+button:hover {
+  background-color: #e55a50;
+  transform: translateY(-2px);
+}
+
+button:active {
+  background-color: #d1493b;
+  transform: translateY(0);
+}
+
+/* Modal */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(5px);
+}
+
+.modal-content {
+  background-color: #fff;
+  margin: 10% auto;
+  padding: 20px;
+  border: none;
+  width: 80%;
+  max-width: 500px;
+  text-align: center;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.modal-content h2 {
+  color: #ff6f61;
+  margin-bottom: 20px;
+}
+
+.close {
+  color: #333;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+  color: #007bff;
+  text-decoration: none;
+}
+
+#order-history {
+  max-height: 300px;
+  overflow-y: auto;
+  margin-top: 20px;
+  text-align: left;
+}
+
+.order-item {
+  border-bottom: 1px solid #f1f1f1;
+  padding: 10px 0;
+}
+
+/* Seção de checkout */
+#checkout {
+  padding: 20px;
+}
+
+#checkout h2 {
+  color: #ff6f61;
+  margin-bottom: 20px;
+}
+
+#carrinho-detalhes {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 10px;
+  background-color: white;
+  margin-bottom: 20px;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .header-content,
+  .user-actions {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  #login-form {
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  #produtos {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .produto {
+    width: 100%;
+    max-width: 400px;
+  }
+
+  .modal-content {
+    width: 90%;
+  }
+}
+/* Modal de Pagamento */
+.payment-modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(5px);
+}
+
+.payment-modal-content {
+  background-color: #fff;
+  margin: 15% auto;
+  padding: 20px;
+  border: none;
+  width: 80%;
+  max-width: 500px;
+  text-align: center;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.payment-modal-content h2 {
+  color: #ff6f61;
+  margin-bottom: 20px;
+}
+
+.payment-modal .close {
+  color: #333;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.payment-modal .close:hover,
+.payment-modal .close:focus {
+  color: #ff6f61;
+  text-decoration: none;
+}
+
+.payment-modal-content button {
+  padding: 10px 20px;
+  margin: 10px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  background-color: #ff6f61;
+  color: white;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.payment-modal-content button:hover {
+  background-color: #e96559;
+  transform: translateY(-2px);
+}
+
+.payment-modal-content button:active {
+  background-color: #cf584e;
+  transform: translateY(0);
+}
+
+/* Modal de Troco, Pix e Pedido Finalizado */
+.payment-modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(5px);
+}
+
+.payment-modal-content {
+  background-color: #fff;
+  margin: 15% auto;
+  padding: 20px;
+  border: none;
+  width: 80%;
+  max-width: 500px;
+  text-align: center;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.payment-modal-content h2 {
+  color: #ff6f61;
+  margin-bottom: 20px;
+}
+
+.payment-modal .close {
+  color: #333;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.payment-modal .close:hover,
+.payment-modal .close:focus {
+  color: #ff6f61;
+  text-decoration: none;
+}
+
+.payment-modal-content button {
+  padding: 10px 20px;
+  margin: 10px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  background-color: #ff6f61;
+  color: white;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.payment-modal-content button:hover {
+  background-color: #e96559;
+  transform: translateY(-2px);
+}
+
+.payment-modal-content button:active {
+  background-color: #cf584e;
+  transform: translateY(0);
+}
+/* Modal de Troco, Pix, Pedido Finalizado e Erro */
+.payment-modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(5px);
+}
+
+.payment-modal-content {
+  background-color: #fff;
+  margin: 15% auto;
+  padding: 20px;
+  border: none;
+  width: 80%;
+  max-width: 500px;
+  text-align: center;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.payment-modal-content h2 {
+  color: #ff6f61;
+  margin-bottom: 20px;
+}
+
+.payment-modal .close {
+  color: #333;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.payment-modal .close:hover,
+.payment-modal .close:focus {
+  color: #ff6f61;
+  text-decoration: none;
+}
+
+.payment-modal-content button {
+  padding: 10px 20px;
+  margin: 10px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  background-color: #ff6f61;
+  color: white;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.payment-modal-content button:hover {
+  background-color: #e96559;
+  transform: translateY(-2px);
+}
+
+.payment-modal-content button:active {
+  background-color: #cf584e;
+  transform: translateY(0);
+}
+/* Modal de Alerta */
+.payment-modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(5px);
+}
+
+.payment-modal-content {
+  background-color: #fff;
+  margin: 15% auto;
+  padding: 20px;
+  border: none;
+  width: 80%;
+  max-width: 500px;
+  text-align: center;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.payment-modal-content h2 {
+  color: #ff6f61;
+  margin-bottom: 20px;
+}
+
+.payment-modal .close {
+  color: #333;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.payment-modal .close:hover,
+.payment-modal .close:focus {
+  color: #ff6f61;
+  text-decoration: none;
+}
+
+.payment-modal-content button {
+  padding: 10px 20px;
+  margin: 10px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  background-color: #ff6f61;
+  color: white;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.payment-modal-content button:hover {
+  background-color: #e96559;
+  transform: translateY(-2px);
+}
+
+.payment-modal-content button:active {
+  background-color: #cf584e;
+  transform: translateY(0);
+}
+/* Estilos básicos para o modal */
+#trocoModal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
+  padding-top: 60px;
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 5% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+/* Estilos básicos para o modal */
+#errorModal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
+  padding-top: 60px;
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 5% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}

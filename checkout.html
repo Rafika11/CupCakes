@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Finalização de Compra</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <header>
+      <h1>Finalizar Compra</h1>
+    </header>
+
+    <section id="checkout">
+      <h2 id="user-name"></h2>
+      <div id="carrinho-detalhes">
+        <!-- Lista de produtos adicionados será exibida aqui via JavaScript -->
+      </div>
+
+      <div id="checkout-opcoes">
+        <button onclick="finalizarCompra()">Finalizar Compra</button>
+        <button onclick="limparCarrinho()">Excluir Produtos</button>
+        <a href="index.html" class="btn-voltar">Voltar para a Página Inicial</a>
+      </div>
+    </section>
+
+    <!-- Modal para Escolher Método de Pagamento -->
+    <div id="choose-payment-modal" class="payment-modal">
+      <div class="payment-modal-content">
+        <span class="close" onclick="closeChoosePaymentModal()">&times;</span>
+        <h2>Escolha o Método de Pagamento</h2>
+        <button onclick="selectPaymentMethod('Dinheiro')">Dinheiro</button>
+        <button onclick="selectPaymentMethod('Pix')">Pix</button>
+      </div>
+    </div>
+
+    <!-- Modal para Inserir Valor Pago em Dinheiro -->
+    <div id="dinheiro-modal" class="payment-modal">
+      <div class="payment-modal-content">
+        <span class="close" onclick="closeDinheiroModal()">&times;</span>
+        <h2>Valor a Pagar em Dinheiro</h2>
+        <p>Total: R$<span id="total-valor"></span></p>
+        <label for="valor-pago">Valor Pago:</label>
+        <input
+          type="number"
+          id="valor-pago"
+          placeholder="Insira o valor pago"
+        />
+        <button onclick="confirmDinheiroPayment()">Confirmar</button>
+      </div>
+    </div>
+
+    <div id="trocoModal">
+      <div class="modal-content">
+        <span class="close" onclick="closeTrocoModal()">&times;</span>
+        <p id="trocoPedidoInfo">Informações do pedido</p>
+        <button id="okTrocoButton">OK</button>
+      </div>
+    </div>
+
+    <!-- Modal de Erro -->
+    <div id="errorModal" class="payment-modal">
+      <div class="payment-modal-content">
+        <span class="close" onclick="closeErrorModal()">&times;</span>
+        <p id="errorMessage"></p>
+        <button id="okButton" onclick="closeErrorModal()">OK</button>
+      </div>
+    </div>
+
+    <!-- Modal para Informação de Pix -->
+    <div id="pix-modal" class="payment-modal">
+      <div class="payment-modal-content">
+        <span class="close" onclick="closePixModal()">&times;</span>
+        <h2>Informação de Pix</h2>
+        <p id="pix-message"></p>
+        <button onclick="closePixModal()">OK</button>
+      </div>
+    </div>
+
+    <!-- Modal para Pedido Finalizado -->
+    <div id="pedido-modal" class="payment-modal">
+      <div class="payment-modal-content">
+        <span class="close" onclick="closePedidoModal()">&times;</span>
+        <h2>Pedido Finalizado</h2>
+        <p id="pedido-message"></p>
+        <button onclick="closePedidoModal()">OK</button>
+      </div>
+    </div>
+
+    <!-- Modal de Alerta -->
+    <div id="alert-modal" class="payment-modal">
+      <div class="payment-modal-content">
+        <span class="close" onclick="closeAlertModal()">&times;</span>
+        <h2>Alerta</h2>
+        <p id="alert-message"></p>
+        <button onclick="closeAlertModal()">OK</button>
+      </div>
+    </div>
+  </body>
+</html>
