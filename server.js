@@ -16,10 +16,18 @@ app.use(
   helmet.contentSecurityPolicy({
     directives: {
       defaultSrc: ["'self'"],
-      styleSrc: ["'self'", 'https://www.gstatic.com'],
+      styleSrc: ["'self'", "https://www.gstatic.com"],
     },
   })
 );
+
+// Servir arquivos estáticos da pasta 'public'
+app.use(express.static("public"));
+
+// Rota para a página inicial
+app.get("/", (req, res) => {
+  res.sendFile(__dirname + "/public/index.html");
+});
 
 mongoose
   .connect(process.env.MONGODB_URI, {
@@ -35,11 +43,6 @@ mongoose
 
 const pedidoRoutes = require("./routes/pedidos");
 app.use("/api/pedidos", pedidoRoutes);
-
-// Rota para a página inicial
-app.get("/", (req, res) => {
-  res.send("Bem-vindo à Loja de Cupcakes!");
-});
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
