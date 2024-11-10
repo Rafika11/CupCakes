@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const Pedido = require("../models/Pedido");
-const pedidoRoutes = require("./routes/pedidos");
 
 router.post("/", async (req, res) => {
   const novoPedido = new Pedido(req.body);
