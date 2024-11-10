@@ -4,10 +4,22 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const helmet = require("helmet");
 
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
+app.use(helmet());
+
+// Configurar CSP para permitir estilos de fontes confiáveis
+app.use(
+  helmet.contentSecurityPolicy({
+    directives: {
+      defaultSrc: ["'self'"],
+      styleSrc: ["'self'", 'https://www.gstatic.com'],
+    },
+  })
+);
 
 mongoose
   .connect(process.env.MONGODB_URI, {
@@ -23,6 +35,11 @@ mongoose
 
 const pedidoRoutes = require("./routes/pedidos");
 app.use("/api/pedidos", pedidoRoutes);
+
+// Rota para a página inicial
+app.get("/", (req, res) => {
+  res.send("Bem-vindo à Loja de Cupcakes!");
+});
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
