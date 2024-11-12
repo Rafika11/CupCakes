@@ -1,16 +1,17 @@
-// cd "/c/Users/rafae/Desktop/ENGENHARIA SOFTWARE/2024/02° SEMESTRE/PROJETO INTEGRADOR TRASNDISCIPLINAR EM ENGENHARIA DE SOFTWARE II/Projeto Final/ProjetoBackEnd/Projeto Fase 1"
-
-//------------------
-
+// Carregar variáveis de ambiente do arquivo .env
 require("dotenv").config();
 
+// Importar módulos necessários
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const helmet = require("helmet");
 
+// Criar instância do express
 const app = express();
+
+// Configurar middlewares
 app.use(cors());
 app.use(bodyParser.json());
 app.use(helmet());
@@ -33,6 +34,7 @@ app.get("/", (req, res) => {
   res.sendFile(__dirname + "/public/index.html");
 });
 
+// Conectar ao MongoDB
 mongoose
   .connect(process.env.MONGODB_URI, {
     useNewUrlParser: true,
@@ -43,11 +45,14 @@ mongoose
   })
   .catch((err) => {
     console.error("Erro ao conectar ao MongoDB:", err);
+    process.exit(1); // Terminar o processo com erro
   });
 
+// Importar e usar as rotas de pedidos
 const pedidoRoutes = require("./routes/pedidos");
 app.use("/api/pedidos", pedidoRoutes);
 
+// Definir a porta e iniciar o servidor
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Servidor rodando na porta ${PORT}`);
