@@ -3,15 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; style-src 'self' 'unsafe-inline' 'nonce-ABC123' https://fonts.googleapis.com https://fonts.gstatic.com; script-src 'self';"
+    />
     <title>Loja de Cupcakes</title>
     <link rel="stylesheet" href="styles.css" />
     <script src="script.js" defer></script>
-
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap"
-    />
-
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap"
@@ -60,7 +58,6 @@
       </div>
     </section>
 
-    <!-- Modal para Histórico de Pedidos -->
     <!-- Modal para Histórico de Pedidos -->
     <div id="order-history-modal" class="modal">
       <div class="modal-content">

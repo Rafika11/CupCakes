@@ -8,6 +8,9 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const helmet = require("helmet");
 
+// Configurar Mongoose strictQuery
+mongoose.set("strictQuery", false); // ou true, conforme necessário
+
 // Criar instância do express
 const app = express();
 

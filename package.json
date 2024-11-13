@@ -1,19 +1,17 @@
 {
-  "name": "projeto-fase-1",
+  "name": "projeto-cupcake",
   "version": "1.0.0",
-  "description": "Loja de Cupcakes - Projeto Fase 1",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
   },
   "dependencies": {
-    "body-parser": "^1.19.1",
-    "cors": "^2.8.5",
-    "dotenv": "^10.0.0",
     "express": "^4.18.1",
-    "helmet": "^5.1.1",
     "mongoose": "^6.3.4",
-    "bson": "^4.0.4"
+    "dotenv": "^10.0.0",
+    "helmet": "^5.1.1",
+    "cors": "^2.8.5",
+    "body-parser": "^1.19.1"
   },
   "engines": {
     "node": "16.x",

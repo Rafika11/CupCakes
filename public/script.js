@@ -475,7 +475,7 @@ function getNextOrderNumber() {
 }
 // Função para abrir o modal de pagamento
 function openPaymentModal() {
-  var modal = document.getElementById("choose-payment-modal");
+  const modal = document.getElementById("choose-payment-modal");
   if (modal) {
     modal.style.display = "block";
   } else {
@@ -610,8 +610,8 @@ function closeDinheiroModal() {
 
 // Função para abrir o modal de troco
 function openTrocoModal(pedidoInfo) {
-  var modal = document.getElementById("trocoModal");
-  var pedidoInfoElement = document.getElementById("trocoPedidoInfo");
+  const modal = document.getElementById("trocoModal");
+  const pedidoInfoElement = document.getElementById("trocoPedidoInfo");
 
   if (modal && pedidoInfoElement) {
     pedidoInfoElement.textContent = pedidoInfo;
@@ -623,13 +623,13 @@ function openTrocoModal(pedidoInfo) {
 
 // Função para fechar o modal de troco
 function closeTrocoModal() {
-  var modal = document.getElementById("trocoModal");
+  const modal = document.getElementById("trocoModal");
   modal.style.display = "none";
 }
 
 // Função para confirmar o pedido e zerar o carrinho
 function confirmarPedido() {
-  var modal = document.getElementById("trocoModal");
+  const modal = document.getElementById("trocoModal");
   modal.style.display = "none";
 
   // Lógica para confirmar o pedido e registrar as informações
@@ -639,8 +639,8 @@ function confirmarPedido() {
 
 // Função para finalizar a compra
 function finalizarCompra() {
-  var valorPago = parseFloat(document.getElementById("valorPago").value);
-  var valorTotalPedido = parseFloat(
+  const valorPago = parseFloat(document.getElementById("valorPago").value);
+  const valorTotalPedido = parseFloat(
     document.getElementById("valorTotalPedido").value
   );
 
@@ -652,8 +652,8 @@ function finalizarCompra() {
   if (valorPago < valorTotalPedido) {
     openErrorModal(valorTotalPedido);
   } else {
-    var troco = valorPago - valorTotalPedido;
-    var pedidoInfo = `Total a ser pago: R$${valorTotalPedido.toFixed(
+    const troco = valorPago - valorTotalPedido;
+    const pedidoInfo = `Total a ser pago: R$${valorTotalPedido.toFixed(
       2
     )}. Troco: R$${troco.toFixed(2)}`;
     openTrocoModal(pedidoInfo);
@@ -662,8 +662,8 @@ function finalizarCompra() {
 
 // Função para abrir o modal de erro
 function openErrorModal(valorTotalPedido) {
-  var modal = document.getElementById("errorModal");
-  var errorMessageElement = document.getElementById("errorMessage");
+  const modal = document.getElementById("errorModal");
+  const errorMessageElement = document.getElementById("errorMessage");
 
   if (modal && errorMessageElement) {
     errorMessageElement.textContent = `O valor pago é insuficiente. Por favor, pague pelo menos R$${valorTotalPedido.toFixed(
@@ -677,7 +677,7 @@ function openErrorModal(valorTotalPedido) {
 
 // Função para fechar o modal de erro
 function closeErrorModal() {
-  var modal = document.getElementById("errorModal");
+  const modal = document.getElementById("errorModal");
   modal.style.display = "none";
 }
 
@@ -815,19 +815,19 @@ function getCurrentOrderNumber() {
 
 // Função para abrir o modal de Erro// Função para abrir o modal de Erro
 function openErrorModal() {
-  var modal = document.getElementById("errorModal");
+  const modal = document.getElementById("errorModal");
   modal.style.display = "block";
 }
 
 // Função para fechar o modal de Erro
 function closeErrorModal() {
-  var modal = document.getElementById("errorModal");
+  const modal = document.getElementById("errorModal");
   modal.style.display = "none";
 }
 
 // Função para finalizar a compra
 function finalizarCompra() {
-  var valorPago = document.getElementById("valorPago").value;
+  const valorPago = document.getElementById("valorPago").value;
 
   if (valorPago < valorMinimo) {
     openErrorModal();
@@ -1069,7 +1069,7 @@ window.onload = function () {
 
 // Função para confirmar o pedido e zerar o carrinho
 function confirmarPedido() {
-  var modal = document.getElementById("trocoModal");
+  const modal = document.getElementById("trocoModal");
   modal.style.display = "none";
 
   // Exibir modal de pedido finalizado após confirmação
@@ -1086,8 +1086,8 @@ function confirmarPedido() {
 
 // Função para abrir o modal de troco
 function openTrocoModal(pedidoInfo) {
-  var modal = document.getElementById("trocoModal");
-  var pedidoInfoElement = document.getElementById("trocoPedidoInfo");
+  const modal = document.getElementById("trocoModal");
+  const pedidoInfoElement = document.getElementById("trocoPedidoInfo");
 
   if (modal && pedidoInfoElement) {
     pedidoInfoElement.textContent = pedidoInfo;
@@ -1139,7 +1139,7 @@ function storeOrder(cart, total) {
 // Função para confirmar o pedido e zerar o carrinho
 // Função para confirmar o pedido e zerar o carrinho
 function confirmarPedido() {
-  var modal = document.getElementById("trocoModal");
+  const modal = document.getElementById("trocoModal");
   modal.style.display = "none";
 
   // Exibir modal de pedido finalizado após confirmação
@@ -1156,8 +1156,8 @@ function confirmarPedido() {
 
 // Função para abrir o modal de troco
 function openTrocoModal(pedidoInfo) {
-  var modal = document.getElementById("trocoModal");
-  var pedidoInfoElement = document.getElementById("trocoPedidoInfo");
+  const modal = document.getElementById("trocoModal");
+  const pedidoInfoElement = document.getElementById("trocoPedidoInfo");
 
   if (modal && pedidoInfoElement) {
     pedidoInfoElement.textContent = pedidoInfo;
@@ -1209,7 +1209,7 @@ function storeOrder(cart, total) {
 
 // Função para confirmar o pedido e zerar o carrinho
 function confirmarPedido() {
-  var modal = document.getElementById("trocoModal");
+  const modal = document.getElementById("trocoModal");
   modal.style.display = "none";
 
   // Exibir modal de pedido finalizado após confirmação
