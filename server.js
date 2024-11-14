@@ -24,7 +24,13 @@ app.use(
   helmet.contentSecurityPolicy({
     directives: {
       defaultSrc: ["'self'"],
-      styleSrc: ["'self'", "https://www.gstatic.com"],
+      styleSrc: [
+        "'self'",
+        "https://www.gstatic.com",
+        "https://fonts.googleapis.com",
+      ],
+      fontSrc: ["'self'", "https://fonts.gstatic.com"],
+      scriptSrc: ["'self'", "'unsafe-inline'"], // Adicione isso se precisar de scripts inline
     },
   })
 );
