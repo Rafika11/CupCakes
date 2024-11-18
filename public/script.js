@@ -182,10 +182,7 @@ function updateUserInterface(nome) {
   }
 }
 
-// Outras funções permanecem iguais...
-
 /*--------------------*/
-
 // Função de validação de telefone
 function validatePhone(telefone) {
   const regex = /^\d{2}\d{9}$/;
@@ -401,20 +398,12 @@ function openOrderHistory() {
     console.error("Elementos do modal de histórico de pedidos não encontrados");
   }
 }
-
-// Função para fechar o modal de histórico de pedidos
 function closeOrderHistory() {
-  const orderHistoryModal = document.getElementById("order-history-modal");
-
+  const orderHistoryModal = document.querySelector("#order-history-modal");
   if (orderHistoryModal) {
     orderHistoryModal.style.display = "none";
-  } else {
-    console.error("Elemento do modal de histórico de pedidos não encontrado");
   }
 }
-
-// Função para carregar o histórico de pedidos
-// Função para carregar o histórico de pedidos
 // Função para carregar o histórico de pedidos
 function loadOrderHistory() {
   const orderHistoryElement = document.getElementById("order-history");
@@ -445,8 +434,6 @@ function loadOrderHistory() {
     console.error("Elemento de histórico de pedidos não encontrado");
   }
 }
-
-// Chamar função ao carregar a página
 // Chamar função ao carregar a página
 window.onload = function () {
   if (isLoggedIn) {
@@ -499,12 +486,11 @@ function selectPaymentMethod(method) {
   handlePaymentMethod(method);
 }
 
-// Função para lidar com o método de pagamento
 function handlePaymentMethod(metodoPagamento) {
   const storedCart = JSON.parse(localStorage.getItem("cartItems"));
 
   if (!storedCart || storedCart.length === 0) {
-    alert("Seu carrinho está vazio.");
+    openAlertModal("Seu carrinho está vazio.");
     return;
   }
 
@@ -514,37 +500,19 @@ function handlePaymentMethod(metodoPagamento) {
   );
 
   if (metodoPagamento.toLowerCase() === "dinheiro") {
-    const valorPago = parseFloat(
-      prompt(`O total é R$${total.toFixed(2)}. Quanto você vai pagar?`)
-    );
-    if (valorPago >= total) {
-      const troco = valorPago - total;
-      alert(
-        `Total a ser pago: R$${valorPago.toFixed(2)}. Troco: R$${troco.toFixed(
-          2
-        )}`
-      );
-    } else {
-      alert(
-        `O valor pago é insuficiente. Por favor, pague pelo menos R$${total.toFixed(
-          2
-        )}.`
-      );
-      return;
-    }
+    openDinheiroModal(total);
   } else if (metodoPagamento.toLowerCase() === "pix") {
-    alert(
+    // Armazenar o pedido antes de mostrar o modal de Pix
+    storeOrder(storedCart, total);
+    openPixModal(
       `Total a ser pago: R$${total.toFixed(
         2
       )}. Chave Pix do estabelecimento: 123@cupcakegourmet.com`
     );
   } else {
-    alert("Método de pagamento inválido.");
+    openErrorModal("Método de pagamento inválido.");
     return;
   }
-
-  // Restante da função finalizarCompra permanece a mesma
-  // ...
 }
 
 // Chame openPaymentModal ao invés de prompt dentro de finalizarCompra
@@ -558,9 +526,6 @@ function finalizarCompra() {
 
   // Abre o modal de pagamento em vez de usar prompt
   openPaymentModal();
-
-  // Restante da função finalizarCompra permanece a mesma
-  // ...
 }
 
 //----------------------------------------------------------
@@ -608,7 +573,6 @@ function closeDinheiroModal() {
 
 //--------------------------------------------------------------
 
-// Função para abrir o modal de troco
 function openTrocoModal(pedidoInfo) {
   const modal = document.getElementById("trocoModal");
   const pedidoInfoElement = document.getElementById("trocoPedidoInfo");
@@ -625,16 +589,6 @@ function openTrocoModal(pedidoInfo) {
 function closeTrocoModal() {
   const modal = document.getElementById("trocoModal");
   modal.style.display = "none";
-}
-
-// Função para confirmar o pedido e zerar o carrinho
-function confirmarPedido() {
-  const modal = document.getElementById("trocoModal");
-  modal.style.display = "none";
-
-  // Lógica para confirmar o pedido e registrar as informações
-  console.log("Pedido confirmado!");
-  console.log("Carrinho zerado!");
 }
 
 // Função para finalizar a compra
@@ -675,29 +629,8 @@ function openErrorModal(valorTotalPedido) {
   }
 }
 
-// Função para fechar o modal de erro
-function closeErrorModal() {
-  const modal = document.getElementById("errorModal");
-  modal.style.display = "none";
-}
-
-// Adicionar evento ao botão OK do modal de erro
-document.getElementById("okButton").addEventListener("click", closeErrorModal);
-
-// Adicionar evento ao botão OK do modal de troco
-document
-  .getElementById("okTrocoButton")
-  .addEventListener("click", confirmarPedido);
-
-// Exemplo de funcionalidade para fechar o modal de erro
-document.getElementsByClassName("close")[0].onclick = closeErrorModal;
-
-// Exemplo de funcionalidade para fechar o modal de troco
-document.getElementsByClassName("close")[1].onclick = closeTrocoModal;
-
 //--------------------------------
 
-// Função para abrir o modal de Pix
 // Função para abrir o modal de Pix
 function openPixModal(message) {
   const pixModal = document.getElementById("pix-modal");
@@ -727,18 +660,6 @@ function closePixModal() {
   }
 }
 
-// Função para abrir o modal de pedido finalizado
-function openPedidoModal(message) {
-  const pedidoModal = document.getElementById("pedido-modal");
-  const pedidoMessage = document.getElementById("pedido-message");
-  if (pedidoModal && pedidoMessage) {
-    pedidoMessage.innerText = message;
-    pedidoModal.style.display = "block";
-  } else {
-    console.error("Elementos do modal de pedido finalizado não encontrados");
-  }
-}
-
 // Função para fechar o modal de pedido finalizado
 function closePedidoModal() {
   const pedidoModal = document.getElementById("pedido-modal");
@@ -750,38 +671,6 @@ function closePedidoModal() {
   }
 }
 
-// Função para lidar com o método de pagamento
-function handlePaymentMethod(metodoPagamento) {
-  const storedCart = JSON.parse(localStorage.getItem("cartItems"));
-
-  if (!storedCart || storedCart.length === 0) {
-    openAlertModal("Seu carrinho está vazio.");
-    return;
-  }
-
-  const total = storedCart.reduce(
-    (sum, item) => sum + item.produto.preco * item.quantidade,
-    0
-  );
-
-  if (metodoPagamento.toLowerCase() === "dinheiro") {
-    openDinheiroModal(total);
-  } else if (metodoPagamento.toLowerCase() === "pix") {
-    // Armazenar o pedido antes de mostrar o modal de Pix
-    storeOrder(storedCart, total);
-    openPixModal(
-      `Total a ser pago: R$${total.toFixed(
-        2
-      )}. Chave Pix do estabelecimento: 123@cupcakegourmet.com`
-    );
-  } else {
-    openErrorModal("Método de pagamento inválido.");
-    return;
-  }
-}
-
-// Função para armazenar o pedido
-// Função para armazenar o pedido
 function storeOrder(cart, total) {
   const orderNumber = getNextOrderNumber();
   const orderDate = new Date().toLocaleString();
@@ -819,10 +708,11 @@ function openErrorModal() {
   modal.style.display = "block";
 }
 
-// Função para fechar o modal de Erro
 function closeErrorModal() {
-  const modal = document.getElementById("errorModal");
-  modal.style.display = "none";
+  const errorModal = document.querySelector("#errorModal");
+  if (errorModal) {
+    errorModal.style.display = "none";
+  }
 }
 
 // Função para finalizar a compra
@@ -838,9 +728,6 @@ function finalizarCompra() {
     console.log("Carrinho zerado!");
   }
 }
-
-// Adicionar evento ao botão OK
-document.getElementById("okButton").addEventListener("click", closeErrorModal);
 
 // Exemplo de funcionalidade para fechar o modal
 const span = document.getElementsByClassName("close")[0];
@@ -896,26 +783,6 @@ function finalizarPedido() {
   limparCarrinho();
 }
 
-// Adicionar evento de clique ao botão "X" do modal de dinheiro
-document
-  .querySelector("#dinheiro-modal .close")
-  .addEventListener("click", closeDinheiroModal);
-
-// Adicionar evento de clique ao botão "X" do modal de Pix
-document
-  .querySelector("#pix-modal .close")
-  .addEventListener("click", closePixModal);
-
-// Adicionar evento de clique ao botão "X" do modal de erro
-document
-  .querySelector("#errorModal .close")
-  .addEventListener("click", closeErrorModal);
-
-// Adicionar evento de clique ao botão "X" do modal de escolha de pagamento
-document
-  .querySelector("#choose-payment-modal .close")
-  .addEventListener("click", closeChoosePaymentModal);
-
 // Finalizar Compra
 function finalizarCompra() {
   const storedCart = JSON.parse(localStorage.getItem("cartItems"));
@@ -932,89 +799,6 @@ function finalizarCompra() {
 function selectPaymentMethod(method) {
   closeChoosePaymentModal();
   handlePaymentMethod(method);
-}
-
-// Lidar com Método de Pagamento
-
-// Função para lidar com o método de pagamento
-function handlePaymentMethod(metodoPagamento) {
-  const storedCart = JSON.parse(localStorage.getItem("cartItems"));
-
-  if (!storedCart || storedCart.length === 0) {
-    openAlertModal("Seu carrinho está vazio.");
-    return;
-  }
-
-  const total = storedCart.reduce(
-    (sum, item) => sum + item.produto.preco * item.quantidade,
-    0
-  );
-
-  if (metodoPagamento.toLowerCase() === "dinheiro") {
-    openDinheiroModal(total);
-  } else if (metodoPagamento.toLowerCase() === "pix") {
-    // Armazenar o pedido antes de mostrar o modal de Pix
-    storeOrder(storedCart, total);
-    openPixModal(
-      `Total a ser pago: R$${total.toFixed(
-        2
-      )}. Chave Pix do estabelecimento: 123@cupcakegourmet.com`
-    );
-  } else {
-    openErrorModal("Método de pagamento inválido.");
-  }
-}
-
-// Confirmar Pagamento em Dinheiro
-function confirmDinheiroPayment() {
-  const valorPago = parseFloat(document.getElementById("valor-pago").value);
-  const total = parseFloat(document.getElementById("total-valor").innerText);
-
-  if (valorPago >= total) {
-    const troco = valorPago - total;
-    const pedidoInfo = `Total a ser pago: R$${total.toFixed(
-      2
-    )}. Troco: R$${troco.toFixed(2)}`;
-
-    // Registrar o pedido antes de mostrar o modal de troco
-    storeOrder(JSON.parse(localStorage.getItem("cartItems")), total);
-
-    openTrocoModal(pedidoInfo);
-    closeDinheiroModal();
-  } else {
-    openErrorModal(
-      `O valor pago é insuficiente. Por favor, pague pelo menos R$${total.toFixed(
-        2
-      )}.`
-    );
-  }
-}
-
-// Função para armazenar o pedido
-function storeOrder(cart, total) {
-  const orderNumber = getNextOrderNumber();
-  const orderDate = new Date().toLocaleString();
-
-  // Carregar o histórico de pedidos do usuário ou inicializar um novo array
-  let userOrderHistory =
-    JSON.parse(localStorage.getItem(`orderHistory_${customerPhone}`)) || [];
-
-  // Adicionar o novo pedido ao histórico do usuário
-  userOrderHistory.push({
-    number: orderNumber,
-    date: orderDate,
-    total: total.toFixed(2),
-    items: cart,
-  });
-
-  // Salvar o histórico atualizado no localStorage
-  localStorage.setItem(
-    `orderHistory_${customerPhone}`,
-    JSON.stringify(userOrderHistory)
-  );
-
-  // Armazenar o número do pedido atual para exibir no modal de pedido finalizado
-  localStorage.setItem("currentOrderNumber", orderNumber);
 }
 
 // Função para carregar o histórico de pedidos na página index.html
@@ -1047,8 +831,6 @@ function loadOrderHistory() {
     console.error("Elemento de histórico de pedidos não encontrado");
   }
 }
-
-// Chamar função ao carregar a página index.html
 // Chamar função ao carregar a página index.html
 window.onload = function () {
   if (isLoggedIn) {
@@ -1067,36 +849,6 @@ window.onload = function () {
   }
 };
 
-// Função para confirmar o pedido e zerar o carrinho
-function confirmarPedido() {
-  const modal = document.getElementById("trocoModal");
-  modal.style.display = "none";
-
-  // Exibir modal de pedido finalizado após confirmação
-  const orderNumber = getCurrentOrderNumber();
-  openPedidoModal(
-    `Compra finalizada com sucesso!\nNúmero do Pedido: ${orderNumber}\nData e Hora: ${new Date().toLocaleString()}`
-  );
-
-  // Limpar o carrinho após a finalização do pedido
-  limparCarrinho();
-  console.log("Pedido confirmado!");
-  console.log("Carrinho zerado!");
-}
-
-// Função para abrir o modal de troco
-function openTrocoModal(pedidoInfo) {
-  const modal = document.getElementById("trocoModal");
-  const pedidoInfoElement = document.getElementById("trocoPedidoInfo");
-
-  if (modal && pedidoInfoElement) {
-    pedidoInfoElement.textContent = pedidoInfo;
-    modal.style.display = "block";
-  } else {
-    console.error("Elementos do modal de troco não encontrados");
-  }
-}
-
 // Função para abrir o modal de pedido finalizado
 function openPedidoModal(message) {
   const pedidoModal = document.getElementById("pedido-modal");
@@ -1109,35 +861,6 @@ function openPedidoModal(message) {
   }
 }
 
-// Função para armazenar o pedido (já existente, mas importante revisar)
-function storeOrder(cart, total) {
-  const orderNumber = getNextOrderNumber();
-  const orderDate = new Date().toLocaleString();
-
-  // Carregar o histórico de pedidos do usuário ou inicializar um novo array
-  let userOrderHistory =
-    JSON.parse(localStorage.getItem(`orderHistory_${customerPhone}`)) || [];
-
-  // Adicionar o novo pedido ao histórico do usuário
-  userOrderHistory.push({
-    number: orderNumber,
-    date: orderDate,
-    total: total.toFixed(2),
-    items: cart,
-  });
-
-  // Salvar o histórico atualizado no localStorage
-  localStorage.setItem(
-    `orderHistory_${customerPhone}`,
-    JSON.stringify(userOrderHistory)
-  );
-
-  // Armazenar o número do pedido atual para exibir no modal de pedido finalizado
-  localStorage.setItem("currentOrderNumber", orderNumber);
-}
-
-// Função para confirmar o pedido e zerar o carrinho
-// Função para confirmar o pedido e zerar o carrinho
 function confirmarPedido() {
   const modal = document.getElementById("trocoModal");
   modal.style.display = "none";
@@ -1154,77 +877,6 @@ function confirmarPedido() {
   console.log("Carrinho zerado!");
 }
 
-// Função para abrir o modal de troco
-function openTrocoModal(pedidoInfo) {
-  const modal = document.getElementById("trocoModal");
-  const pedidoInfoElement = document.getElementById("trocoPedidoInfo");
-
-  if (modal && pedidoInfoElement) {
-    pedidoInfoElement.textContent = pedidoInfo;
-    modal.style.display = "block";
-  } else {
-    console.error("Elementos do modal de troco não encontrados");
-  }
-}
-
-// Função para abrir o modal de pedido finalizado
-function openPedidoModal(message) {
-  const pedidoModal = document.getElementById("pedido-modal");
-  const pedidoMessage = document.getElementById("pedido-message");
-  if (pedidoModal && pedidoMessage) {
-    pedidoMessage.innerText = message;
-    pedidoModal.style.display = "block";
-  } else {
-    console.error("Elementos do modal de pedido finalizado não encontrados");
-  }
-}
-
-// Função para armazenar o pedido (já existente, mas importante revisar)
-// Função para armazenar o pedido
-function storeOrder(cart, total) {
-  const orderNumber = getNextOrderNumber();
-  const orderDate = new Date().toLocaleString();
-
-  // Carregar o histórico de pedidos do usuário ou inicializar um novo array
-  let userOrderHistory =
-    JSON.parse(localStorage.getItem(`orderHistory_${customerPhone}`)) || [];
-
-  // Adicionar o novo pedido ao histórico do usuário
-  userOrderHistory.push({
-    number: orderNumber,
-    date: orderDate,
-    total: total.toFixed(2),
-    items: cart,
-  });
-
-  // Salvar o histórico atualizado no localStorage
-  localStorage.setItem(
-    `orderHistory_${customerPhone}`,
-    JSON.stringify(userOrderHistory)
-  );
-
-  // Armazenar o número do pedido atual para exibir no modal de pedido finalizado
-  localStorage.setItem("currentOrderNumber", orderNumber);
-}
-
-// Função para confirmar o pedido e zerar o carrinho
-function confirmarPedido() {
-  const modal = document.getElementById("trocoModal");
-  modal.style.display = "none";
-
-  // Exibir modal de pedido finalizado após confirmação
-  const orderNumber = getCurrentOrderNumber();
-  openPedidoModal(
-    `Compra finalizada com sucesso!\nNúmero do Pedido: ${orderNumber}\nData e Hora: ${new Date().toLocaleString()}`
-  );
-
-  // Limpar o carrinho após a finalização do pedido
-  limparCarrinho();
-  console.log("Pedido confirmado!");
-  console.log("Carrinho zerado!");
-}
-
-// Confirmar Pagamento em Dinheiro
 function confirmDinheiroPayment() {
   const valorPago = parseFloat(document.getElementById("valor-pago").value);
   const total = parseFloat(document.getElementById("total-valor").innerText);
@@ -1292,8 +944,6 @@ if (closePixButton) {
 const closeErrorButton = document.querySelector("#errorModal .close");
 if (closeErrorButton) {
   closeErrorButton.addEventListener("click", closeErrorModal);
-} else {
-  console.error("Elemento do botão 'X' do modal de erro não encontrado");
 }
 
 const closeChoosePaymentButton = document.querySelector(
@@ -1301,10 +951,99 @@ const closeChoosePaymentButton = document.querySelector(
 );
 if (closeChoosePaymentButton) {
   closeChoosePaymentButton.addEventListener("click", closeChoosePaymentModal);
-} else {
-  console.error(
-    "Elemento do botão 'X' do modal de escolha de pagamento não encontrado"
-  );
 }
 
-/*----------------------------------------------*/
+document.addEventListener("DOMContentLoaded", function () {
+  // Função para fechar o modal de troco
+  function closeTrocoModal() {
+    const trocoModal = document.querySelector("#trocoModal");
+    if (trocoModal) {
+      trocoModal.style.display = "none";
+    } else {
+      console.error("Elemento #trocoModal não encontrado no DOM.");
+    }
+  }
+
+  // Função para adicionar pedido ao histórico
+  function adicionarPedidoAoHistorico(pedido) {
+    const orderHistory = document.getElementById("order-history");
+    if (orderHistory) {
+      const pedidoElemento = document.createElement("div");
+      pedidoElemento.className = "pedido-item";
+      pedidoElemento.innerHTML = `
+        <p>Pedido: ${pedido.descricao}</p>
+        <p>Valor: R$${pedido.valor}</p>
+      `;
+      orderHistory.appendChild(pedidoElemento);
+    } else {
+      console.error("Elemento #order-history não encontrado no DOM.");
+    }
+  }
+
+  // Adicionar evento ao botão OK do modal de troco
+  const okTrocoButton = document.getElementById("okTrocoButton");
+  if (okTrocoButton) {
+    okTrocoButton.addEventListener("click", confirmarPedido);
+  }
+
+  // Função para fechar o modal de erro
+  function closeErrorModal() {
+    const errorModal = document.querySelector("#errorModal");
+    if (errorModal) {
+      errorModal.style.display = "none";
+    } else {
+      console.error("Elemento #errorModal não encontrado no DOM.");
+    }
+  }
+
+  const errorCloseButton = document.querySelector("#errorModal .close");
+  if (errorCloseButton) {
+    errorCloseButton.addEventListener("click", closeErrorModal);
+  }
+
+  // Função para fechar o modal de Histórico de Pedidos
+  function closeOrderHistory() {
+    const orderHistoryModal = document.querySelector("#order-history-modal");
+    if (orderHistoryModal) {
+      orderHistoryModal.style.display = "none";
+    } else {
+      console.error("Elemento #order-history-modal não encontrado no DOM.");
+    }
+  }
+  const orderHistoryCloseButton = document.querySelector(
+    "#order-history-modal .close"
+  );
+  if (orderHistoryCloseButton) {
+    orderHistoryCloseButton.addEventListener("click", closeOrderHistory);
+  }
+
+  // Função para fechar modal de escolha de pagamento
+  function closeChoosePaymentModal() {
+    const choosePaymentModal = document.querySelector("#choose-payment-modal");
+    if (choosePaymentModal) {
+      choosePaymentModal.style.display = "none";
+    } else {
+      console.error("Elemento #choose-payment-modal não encontrado no DOM.");
+    }
+  }
+  const choosePaymentCloseButton = document.querySelector(
+    "#choose-payment-modal .close"
+  );
+  if (choosePaymentCloseButton) {
+    choosePaymentCloseButton.addEventListener("click", closeChoosePaymentModal);
+  }
+
+  // Função para fechar modal de dinheiro
+  function closeDinheiroModal() {
+    const dinheiroModal = document.querySelector("#dinheiro-modal");
+    if (dinheiroModal) {
+      dinheiroModal.style.display = "none";
+    } else {
+      console.error("Elemento #dinheiro-modal não encontrado no DOM.");
+    }
+  }
+  const dinheiroCloseButton = document.querySelector("#dinheiro-modal .close");
+  if (dinheiroCloseButton) {
+    dinheiroCloseButton.addEventListener("click", closeDinheiroModal);
+  }
+});
